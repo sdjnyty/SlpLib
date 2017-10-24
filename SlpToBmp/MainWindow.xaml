@@ -1,0 +1,51 @@
+﻿<Window x:Class="YTY.SlpToBmp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YTY.SlpToBmp"
+        mc:Ignorable="d"
+        Title="SlpToBmp"
+        Height="350"
+        Width="525"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+      <ColumnDefinition Width="*"></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+    <Grid Grid.Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+      </Grid.RowDefinitions>
+      <Button Grid.Row="0"
+              Content="选择文件夹"
+              Click="SelectFolder"></Button>
+      <ListBox Grid.Row="1"
+               ItemsSource="{Binding SlpFiles}"
+               ListBoxItem.Selected="ListBox_Selected"></ListBox>
+      <TextBlock Grid.Row="2">调色板：</TextBlock>
+      <ComboBox Grid.Row="3"
+                ItemsSource="{Binding PalFiles}"
+                SelectedValue="{Binding PaletteFile}"></ComboBox>
+      <CheckBox Grid.Row="4"
+                Content="绘制单位边框"
+                IsChecked="{Binding DrawOutline}"></CheckBox>
+      <TextBlock Grid.Row="5">玩家号：</TextBlock>
+      <ComboBox Grid.Row="6"
+                ItemsSource="{Binding PlayerNumbers}"
+                SelectedIndex="0"
+                SelectedValue="{Binding PlayerNumber}"></ComboBox>
+      <Button Grid.Row="7"
+              Content="导出"
+              Click="Export"></Button>
+    </Grid>
+  </Grid>
+</Window>

@@ -14,26 +14,17 @@ namespace ConsoleTest
   {
     static void Main(string[] args)
     {
-      var slp = new SlpFile();
-      slp.Load(@"C:\Program Files (x86)\Age of Empires II\Manager\tools\Turtle Pack\Samples\attack.slp");
-      foreach (var frame in slp.Frames)
+      var slp = new SlpFile
       {
-        var bmp = new Bitmap(frame.Width, frame.Height, PixelFormat.Format8bppIndexed);
-        var palette = bmp.Palette;
-        var pal = new PalFile();
-        pal.Load(@"C:\Program Files (x86)\Age of Empires II\Manager\tools\Turtle Pack\palettes\50500.pal");
-        pal.Palette.ToArray().CopyTo(palette.Entries, 0);
-        bmp.Palette = palette;
-        var bmpData = bmp.LockBits(new Rectangle(0, 0, frame.Width, frame.Height), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
-        for (var x=0;x< frame.Height;x++)
-        {
-          for (var y = 0; y < frame.Width; y++)
-          {
-            
-          }
-        }
-        bmp.UnlockBits(bmpData);
-        bmp.Save(@"c:\1.bmp");
+        Player = 2,
+        DrawOutline=false,
+      };
+      slp.Load(@"D:\Hawkaoc\amt\tools\Turtle Pack\Samples\attack.slp");
+      for(var f=0;f< slp.Frames.Count;f++)
+      {
+        var fileName = $@"c:\slp\{f:0000}.bmp";
+        slp.Frames[f].ToBitmap().Save(fileName,  ImageFormat.Bmp);
+        Console.WriteLine(fileName);
       }
       Console.ReadKey();
     }
